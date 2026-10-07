@@ -1,0 +1,16 @@
+﻿.vs/
+.vscode/
+*.slnx
+*.user
+*.suo
+*.bak
+*.log
+*.tmp
+*.zip
+SQLQuery*.sql
+**/SQLQuery*.sql
+**/Dogrulama_Raporlari/
+Proje_Dogrulama.ps1
+Thumbs.db
+Desktop.ini
+SUNUM_KILAVUZU.txt
