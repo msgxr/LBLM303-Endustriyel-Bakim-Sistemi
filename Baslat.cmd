@@ -107,7 +107,7 @@ goto Menu
 :Ozet
 echo.
 echo EKIPMAN OZETI - "%LBLM_SQL_SERVER%"
-sqlcmd -S "%LBLM_SQL_SERVER%" -E -C -I -b -f 65001 -d EndustriyelBakimDB -Q "SET NOCOUNT ON; SELECT TOP (20) EkipmanKodu, CAST(EkipmanAdi AS NVARCHAR(24)) AS EkipmanAdi, SensorSayisi, AlarmSayisi, ArizaSayisi, BakimEmriSayisi FROM dbo.vw_EkipmanOzeti ORDER BY EkipmanNo;"
+sqlcmd -S "%LBLM_SQL_SERVER%" -E -C -I -b -l 30 -f 65001 -d EndustriyelBakimDB -Q "SET NOCOUNT ON; SELECT TOP (20) EkipmanKodu, CAST(EkipmanAdi AS NVARCHAR(24)) AS EkipmanAdi, SensorSayisi, AlarmSayisi, ArizaSayisi, BakimEmriSayisi FROM dbo.vw_EkipmanOzeti ORDER BY EkipmanNo;"
 exit /b %errorlevel%
 
 :Dosya
@@ -117,7 +117,7 @@ if not exist "%LBLM_ROOT%%~1" (
 )
 echo.
 echo CALISTIRILIYOR: "%~1"
-sqlcmd -S "%LBLM_SQL_SERVER%" -E -C -I -b -f 65001 -d EndustriyelBakimDB -i "%LBLM_ROOT%%~1"
+sqlcmd -S "%LBLM_SQL_SERVER%" -E -C -I -b -l 30 -f 65001 -d EndustriyelBakimDB -i "%LBLM_ROOT%%~1"
 exit /b %errorlevel%
 
 :SqlcmdEksik
