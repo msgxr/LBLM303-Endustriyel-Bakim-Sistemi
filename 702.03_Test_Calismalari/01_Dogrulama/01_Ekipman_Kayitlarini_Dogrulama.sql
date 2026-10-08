@@ -117,23 +117,25 @@ VALUES
     (N'CK_DenetimKayitlari_Islem', 'C'),
     (N'UQ_Alarmlar_OlcumNo', 'UQ');
 
+/* Katalog metinleri farklı collation kullanabilir.
+   Karşılaştırmalar mevcut veritabanının collation ayarıyla yapılır. */
 IF EXISTS
 (
     SELECT 1
     FROM @BeklenenNesneler b
     LEFT JOIN sys.objects o
-        ON o.name = b.NesneAdi
+        ON o.name COLLATE DATABASE_DEFAULT = b.NesneAdi
        AND o.schema_id = SCHEMA_ID(N'dbo')
-       AND o.type = b.NesneTuru
+       AND o.type COLLATE DATABASE_DEFAULT = b.NesneTuru
     WHERE o.object_id IS NULL
 )
 BEGIN
     SELECT b.NesneAdi AS EksikNesne, b.NesneTuru
     FROM @BeklenenNesneler b
     LEFT JOIN sys.objects o
-        ON o.name = b.NesneAdi
+        ON o.name COLLATE DATABASE_DEFAULT = b.NesneAdi
        AND o.schema_id = SCHEMA_ID(N'dbo')
-       AND o.type = b.NesneTuru
+       AND o.type COLLATE DATABASE_DEFAULT = b.NesneTuru
     WHERE o.object_id IS NULL;
     THROW 52000, N'Beklenen tablo, görünüm, yordam, tetikleyici veya kısıt eksik.', 1;
 END;
@@ -154,7 +156,7 @@ IF EXISTS
 (
     SELECT 1
     FROM sys.triggers t
-    INNER JOIN @BeklenenNesneler b ON b.NesneAdi = t.name AND b.NesneTuru = 'TR'
+    INNER JOIN @BeklenenNesneler b ON b.NesneAdi = t.name COLLATE DATABASE_DEFAULT AND b.NesneTuru = 'TR'
     WHERE t.is_disabled = 1
 )
     THROW 52002, N'Beklenen tetikleyicilerden biri devre dışı.', 1;
@@ -198,7 +200,7 @@ IF EXISTS
     (
         SELECT 1 FROM sys.indexes i
         WHERE i.object_id = OBJECT_ID(N'dbo.' + b.TabloAdi)
-          AND i.name = b.IndeksAdi
+          AND i.name COLLATE DATABASE_DEFAULT = b.IndeksAdi
           AND i.is_disabled = 0
           AND i.is_hypothetical = 0
     )
@@ -215,7 +217,7 @@ IF EXISTS
     WHERE NOT EXISTS
     (
         SELECT 1 FROM sys.database_principals p
-        WHERE p.name = b.RolAdi AND p.type = 'R'
+        WHERE p.name COLLATE DATABASE_DEFAULT = b.RolAdi AND p.type = 'R'
     )
 )
     THROW 52005, N'Beklenen SQL Server veritabanı rollerinden biri eksik.', 1;
