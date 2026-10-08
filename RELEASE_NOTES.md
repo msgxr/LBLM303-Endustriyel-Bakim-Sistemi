@@ -4,16 +4,17 @@
 
 Bu değişiklikler kaynak düzeyinde incelenmiştir. Hedef Windows SQL Server üzerinde üç doğrulama dosyasının çalıştırılması gerekir; bu notlar çalışma testi onayı değildir.
 
-- Mevcut iki kurulum dosyası normal T-SQL olarak eşitlendi. SQLCMD modu, ROOT değişkeni ve kullanıcıya özel dosya yolları kaldırıldı.
-- Otomatik DROP DATABASE ve SINGLE_USER kaldırıldı. Mevcut veritabanı varsa ilk kurulum atlanır; mevcut veriler silinmez.
+- Birleşik tam kurulum dosyası kaldırıldı. 01_Veritabani_Olusturma.sql yalnız veritabanı oluşturur; tablo/kısıt/veri/görünüm/yordam/tetikleyici kodları ayrı dosyalardadır.
+- Otomatik DROP DATABASE ve SINGLE_USER yoktur. Mevcut veritabanı yeniden oluşturulmaz.
 - Filtreli indekslerle ilişkili DDL/DML için gerekli SET seçenekleri açıkça tanımlandı.
 - Yapısal testte beklenen nesneler/kısıtlar/indeksler, etkinlik durumu, gerçek kayıt sayımı ve mevcut veri ihlalleri kontrol edilir.
 - Olumsuz senaryo testi altı durumu beklenen hata kodlarıyla kontrol eder; rastgele hatalar artık başarı sayılmaz.
 - Uçtan uca iş akışı testine ara/son durum, stok, denetim ve ROLLBACK doğrulamaları eklendi.
 - Tetikleyici tanım dosyasından örnek veri UPDATE bölümü çıkarıldı. Yeniden tanımlama veri satırlarını düzenlemez.
 - Performans dosyaları aynı veriye dayalı tarih aralığı kullanır. Deneyin zorunlu tarama ile optimize edilmiş erişim olduğu açıklandı.
-- README; ilk kurulum, mevcut sistem güncellemesi, SSMS/VS Code, terminal, testler, sunum sırası ve hata çözümleri için güncellendi.
-- PDF'ler, mevcut v1.0.0 etiketi ve release varlıkları değiştirilmedi. Yeni .ps1 dosyası eklenmedi.
+- README kısaltıldı; bir kez kurulum, kurulum sonrası sorgu/rapor kullanımı ve test sırası ayrı açıklandı.
+- İlk iki tablo dosyasına EndustriyelBakimDB bağlamı eklendi.
+- PDF'ler, mevcut v1.0.0 etiketi ve release varlıkları korundu.
 
 ## v1.0.0 — ilk yayımlanan kaynak
 

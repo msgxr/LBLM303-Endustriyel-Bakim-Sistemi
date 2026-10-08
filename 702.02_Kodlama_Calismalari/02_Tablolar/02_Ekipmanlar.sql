@@ -1,3 +1,6 @@
+USE EndustriyelBakimDB;
+GO
+
 CREATE TABLE dbo.Ekipmanlar
 (
     EkipmanNo INT IDENTITY(1,1) PRIMARY KEY,

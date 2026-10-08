@@ -1,3 +1,6 @@
+USE EndustriyelBakimDB;
+GO
+
 CREATE TABLE dbo.EkipmanTurleri
 (
 
@@ -5,3 +8,4 @@ CREATE TABLE dbo.EkipmanTurleri
    TurAdi NVARCHAR(50) NOT NULL UNIQUE,
    Aciklama NVARCHAR(250) NULL
    );
+
