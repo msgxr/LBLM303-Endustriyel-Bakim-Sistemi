@@ -4,6 +4,8 @@ Microsoft SQL Server ile ekipman, sensör, alarm, arıza, bakım ve stok yöneti
 
 **Kapsam:** 17 tablo, 6 görünüm, 6 yordam, 7 tetikleyici. Örnek veri hedefi: 100 ekipman, 300 sensör, 90.000 ölçüm. Kesin toplamı doğrulama sorgusu hesaplar.
 
+**Doğrulanan sonuç (08.10.2026):** 94.980 toplam kayıt; üç doğrulama testi başarılı. Aynı 101 ölçüm için zorunlu tarama 425, optimize edilmiş erişim 3 mantıksal okuma yaptı (%99,29 azalma). Bu ölçüm yerel SQL Server test ortamına aittir.
+
 ## İlk kurulum — bir kez
 
 SQL Server'a SSMS veya VS Code MSSQL ile bağlanın. SQL dosyalarını editörde açıp tamamını çalıştırın; SSMS'de F5 kullanın. Her dosyanın Messages sonucunu kontrol edin; hata varsa sonraki dosyaya geçmeyin.
