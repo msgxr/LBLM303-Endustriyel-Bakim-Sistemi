@@ -4,21 +4,21 @@ Microsoft SQL Server ile ekipman, sensör, arıza, bakım ve stok yönetimi.
 
 **Gerekenler:** Çalışan SQL Server; SSMS veya VS Code MSSQL. PowerShell komutları için `sqlcmd`.
 
-## Kurulu sistemi çalıştırma
+## Tek komutla çalıştırma
 
-PowerShell terminalinde aşağıdaki komut ekipman özetini gösterir. `localhost` yerine kendi SQL Server sunucu adınızı yazabilirsiniz.
+Proje klasöründeki PowerShell terminalinde:
 
 ```powershell
-sqlcmd -S localhost -E -C -I -b -f 65001 -d EndustriyelBakimDB -Q "SELECT TOP (20) * FROM dbo.vw_EkipmanOzeti ORDER BY EkipmanNo;"
+.\Baslat.cmd
 ```
 
-**SSMS üzerinden:** Sunucu `localhost` → Windows Authentication → Connect → New Query. Aşağıdaki SQL kodunu yapıştırıp **F5** ile çalıştırın:
+`Baslat.cmd` dosyasına çift tıklayarak da açabilirsiniz. İlk ekran ekipman özetini gösterir.
 
-```sql
-USE EndustriyelBakimDB;
-GO
-SELECT TOP (20) * FROM dbo.vw_EkipmanOzeti ORDER BY EkipmanNo;
-```
+**Sunum için:** Menüde **8** ile EER PDF'yi açın; **7** ile üç doğrulama testi, iki rapor ve iki performans sorgusunu sırayla çalıştırın. Her aşamada devam etmek için bir tuşa basın; hata varsa sıra durur.
+
+**Diğer seçenekler:** 1 ekipman özeti · 2 kayıt sayımı · 3 kısıtlar · 4 bakım iş akışı · 5 raporlar · 6 performans · 0 çıkış.
+
+Farklı sunucu örneği: `.\Baslat.cmd "localhost\SQLEXPRESS"`.
 
 ## İlk kurulum
 
