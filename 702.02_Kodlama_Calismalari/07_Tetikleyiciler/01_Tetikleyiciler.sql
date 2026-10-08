@@ -1,29 +1,16 @@
-﻿USE EndustriyelBakimDB;
+USE EndustriyelBakimDB;
 GO
 
-/* Örnek arıza verilerinin alarm inceleme bilgilerini tamamlar. */
-
-UPDATE a
-SET
-    Durum = N'İncelendi',
-    InceleyenKullaniciNo =
-    (
-        SELECT TOP (1) KullaniciNo
-        FROM dbo.Kullanicilar
-        WHERE Aktif = 1
-        ORDER BY KullaniciNo
-    ),
-    IncelemeZamani = DATEADD(MINUTE, 5, a.AcilisZamani),
-    IncelemeSonucu = N'Alarm incelendi ve arıza doğrulandı.'
-FROM dbo.Alarmlar a
-WHERE EXISTS
-(
-    SELECT 1
-    FROM dbo.Arizalar ar
-    WHERE ar.AlarmNo = a.AlarmNo
-)
-AND a.IncelemeZamani IS NULL;
+SET ANSI_NULLS ON;
+SET QUOTED_IDENTIFIER ON;
+SET ANSI_PADDING ON;
+SET ANSI_WARNINGS ON;
+SET ARITHABORT ON;
+SET CONCAT_NULL_YIELDS_NULL ON;
+SET NUMERIC_ROUNDABORT OFF;
 GO
+
+/* Bu dosya yalnız tetikleyici tanımlarını günceller; örnek veriyi değiştirmez. */
 
 /* =========================================================
    1. ÖLÇÜM SONUCUNDA OTOMATİK ALARM
@@ -122,7 +109,7 @@ BEGIN
           AND a.IncelemeZamani IS NULL
     )
     BEGIN
-        ;;THROW 51001, N'Alarm incelenmeden arıza oluşturulamaz.', 1;
+        ;THROW 51001, N'Alarm incelenmeden arıza oluşturulamaz.', 1;
     END;
 END;
 GO
@@ -149,7 +136,7 @@ BEGIN
           AND i.EkipmanNo <> a.EkipmanNo
     )
     BEGIN
-        ;;THROW 51002, N'Arıza ve bakım emri aynı ekipmana ait olmalıdır.', 1;
+        ;THROW 51002, N'Arıza ve bakım emri aynı ekipmana ait olmalıdır.', 1;
     END;
 
     IF EXISTS
@@ -166,7 +153,7 @@ BEGIN
           AND b.Durum NOT IN (N'Tamamlandı', N'İptal Edildi')
     )
     BEGIN
-        ;;THROW 51003, N'Arıza için aktif düzeltici bakım emri bulunmaktadır.', 1;
+        ;THROW 51003, N'Arıza için aktif düzeltici bakım emri bulunmaktadır.', 1;
     END;
 END;
 GO
@@ -219,7 +206,7 @@ BEGIN
 
     IF EXISTS (SELECT 1 FROM #NegatifStok)
     BEGIN
-        ;;THROW 51004, N'Stok miktarı sıfırın altına düşemez.', 1;
+        ;THROW 51004, N'Stok miktarı sıfırın altına düşemez.', 1;
     END;
 END;
 GO
@@ -368,7 +355,7 @@ AS
 BEGIN
     SET NOCOUNT ON;
 
-    ;;THROW 51005, N'Denetim kayıtları değiştirilemez veya silinemez.', 1;
+    ;THROW 51005, N'Denetim kayıtları değiştirilemez veya silinemez.', 1;
 END;
 GO
 

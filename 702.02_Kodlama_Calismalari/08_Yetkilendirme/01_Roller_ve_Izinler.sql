@@ -55,7 +55,8 @@ GO
 
 /* =========================================================
    TEKNİSYEN
-   Kendisine ait işlerde gerekli yordamları çalıştırabilir.
+   Parça kullanım ve bakım tamamlama yordamlarını çalıştırabilir.
+   Bu rol tanımı satır bazlı 'yalnız kendi işi' denetimi uygulamaz.
    ========================================================= */
 
 GRANT SELECT ON OBJECT::dbo.vw_GuncelAlarmlar
